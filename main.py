@@ -1,5 +1,6 @@
 """Flask application for trading dashboard."""
 
+import sys
 from flask import Flask, render_template, jsonify, request
 from data import MarketDataFetcher, generate_test_data, detect_patterns, pattern_to_dict
 from data.generator import generate_test_pnl
@@ -243,4 +244,5 @@ def api_chart_svg_combined():
 if __name__ == '__main__':
     print("Starting Trading Dashboard...")
     print("Open http://localhost:5000")
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    port = int(sys.argv[1]) if len(sys.argv) > 1 else 5000
+    app.run(debug=True, host="0.0.0.0", port=port)
